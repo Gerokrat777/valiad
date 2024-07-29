@@ -1,0 +1,17 @@
+from fastapi import FastAPI, Path
+
+
+app = FastAPI()
+
+
+
+
+@app.get('/user/{user_id}')
+async def user_id(user: str = 'Alex',
+                  id: int = Path(ge=1, le=100, description='Enter User ID', example=77)) ->dict:
+    return {'User': user, 'Age': id}
+
+@app.get("/user/{username}/{age}")
+async def news(username: str = Path(mix_length=5, max_length=20, description= 'Enter your username', example='evgen'),
+               age: int = Path(ge=18, le=120, description='Enter age', example='75')) -> dict:
+    return {'message': f'Hello, {username}: {age}'}
